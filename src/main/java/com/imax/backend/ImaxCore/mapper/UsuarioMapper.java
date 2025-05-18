@@ -19,6 +19,7 @@ public class UsuarioMapper {
         usuarioResponse.setEmail(usuario.getEmail());
         return usuarioResponse;
     }
+
     public static Usuario toEntity(UsuarioRequest usuarioRequest, Persona persona, Rol rol) {
         Usuario usuario = new Usuario();
         usuario.setPersona(persona);
@@ -28,5 +29,14 @@ public class UsuarioMapper {
         usuario.setPasswordHash(encoder.encode(usuarioRequest.getPassword()));
         usuario.setVigente(true);
         return usuario;
+    }
+
+    public static void updateEntityFromRequest(UsuarioRequest usuarioRequest,Usuario usuario, Persona persona, Rol rol) {
+        usuario.setNombreusuario(usuarioRequest.getNombreusuario());
+        usuario.setEmail(usuarioRequest.getEmail());
+        usuario.setPasswordHash(encoder.encode(usuarioRequest.getPassword()));
+        usuario.setVigente(true);
+        usuario.setRol(rol);
+
     }
 }

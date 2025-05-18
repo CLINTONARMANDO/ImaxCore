@@ -20,7 +20,6 @@ public class PersonaMapper {
     }
     public static Persona toEntity(PersonaRequest personaRequest) {
         Persona persona = new Persona();
-        persona.setId_persona(personaRequest.getId_persona());
         persona.setNombre(personaRequest.getNombre());
         persona.setApellido(personaRequest.getApellido());
         persona.setDni(personaRequest.getDni());
@@ -30,4 +29,14 @@ public class PersonaMapper {
         persona.setFecha_nacimiento(personaRequest.getFecha_nacimiento());
         return persona;
     }
+    public static void updateEntityFromRequest(Persona persona, PersonaRequest request) {
+        persona.setNombre(request.getNombre());
+        persona.setApellido(request.getApellido());
+        persona.setDni(request.getDni());
+        persona.setDireccion(request.getDireccion());
+        persona.setEmail(request.getEmail());
+        persona.setTelefono(request.getTelefono());
+        persona.setFecha_nacimiento(request.getFecha_nacimiento());
+    }
+
 }

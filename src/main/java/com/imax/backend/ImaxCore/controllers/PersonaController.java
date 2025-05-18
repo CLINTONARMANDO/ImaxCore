@@ -38,7 +38,7 @@
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<PersonaResponse> actualizar(@PathVariable Long id, @RequestBody Persona persona) {
+        public ResponseEntity<PersonaResponse> actualizar(@PathVariable Long id, @RequestBody PersonaRequest personaRequest) {
             PersonaResponse personaActualizada = personaService.actualizar(id, personaRequest);
             return ResponseEntity.ok(personaActualizada);
         }

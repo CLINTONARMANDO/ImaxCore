@@ -42,15 +42,7 @@ public class PersonaService {
                 .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
 
         // Actualizar los campos necesarios
-        personaExistente.setNombres(personaRequest.getNombres());
-        personaExistente.setApellidoPaterno(personaRequest.getApellidoPaterno());
-        personaExistente.setApellidoMaterno(personaRequest.getApellidoMaterno());
-        personaExistente.setCorreo(personaRequest.getCorreo());
-        personaExistente.setCelular(personaRequest.getCelular());
-        personaExistente.setDni(personaRequest.getDni());
-        personaExistente.setDireccion(personaRequest.getDireccion());
-        personaExistente.setGenero(personaRequest.getGenero());
-        personaExistente.setFechaNacimiento(personaRequest.getFechaNacimiento());
+        PersonaMapper.updateEntityFromRequest(personaExistente, personaRequest);
 
         Persona personaGuardada = personaRepository.save(personaExistente);
         return PersonaMapper.toResponse(personaGuardada);
