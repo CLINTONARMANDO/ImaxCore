@@ -6,12 +6,8 @@ public class RolRequest {
     private String nombre;
     private String descripcion;
 
-    public Long getId_rol() {
-        return id_rol;
-    }
-    public void setId_rol(Long id_rol) {
-        this.id_rol = id_rol;
-    }
+    public Long getId_rol() { return id_rol; }
+    public void setId_rol(Long id_rol) { this.id_rol = id_rol; }
     public String getNombre() {
         return nombre;
     }
