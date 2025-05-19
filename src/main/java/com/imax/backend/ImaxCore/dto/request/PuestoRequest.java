@@ -1,11 +1,13 @@
 package com.imax.backend.ImaxCore.dto.request;
 
+import com.imax.backend.ImaxCore.model.Area;
+
 public class PuestoRequest {
 
     private Long id_puesto;
     private String nombre;
     private String descripcion;
-    private String areaDefault;
+    private Area area;
 
     public Long getId_puesto() {
         return id_puesto;
@@ -25,10 +27,10 @@ public class PuestoRequest {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public String getAreaDefault() {
-        return areaDefault;
+    public Area getArea() {
+        return area;
     }
-    public void setAreaDefault(String areaDefault) {
-        this.areaDefault = areaDefault;
+    public void setArea(Area area) {
+        this.area = area;
     }
 }

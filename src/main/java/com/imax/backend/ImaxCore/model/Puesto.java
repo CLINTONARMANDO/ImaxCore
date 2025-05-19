@@ -1,10 +1,6 @@
 package com.imax.backend.ImaxCore.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "puestos")
@@ -19,8 +15,9 @@ public class Puesto extends BaseEntity {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "area_default")
-    private String areaDefault;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    private Area area;
 
     public Long getId_puesto() {
         return id_puesto;
@@ -43,11 +40,11 @@ public class Puesto extends BaseEntity {
         this.descripcion = descripcion;
     }
 
-    public String getAreaDefault() {
-        return areaDefault;
+    public Area getArea() {
+        return area;
     }
-    public void setAreaDefault(String areaDefault) {
-        this.areaDefault = areaDefault;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
 }

@@ -1,8 +1,11 @@
 package com.imax.backend.ImaxCore.controllers;
 
+import com.imax.backend.ImaxCore.dto.request.RolRequest;
+import com.imax.backend.ImaxCore.dto.response.RolResponse;
 import com.imax.backend.ImaxCore.model.Rol;
 import com.imax.backend.ImaxCore.services.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,24 +20,28 @@ public class RolController {
 
 
     @GetMapping
-    public List<Rol> obtenerTodos() {
+    public List<RolResponse> obtenerTodos() {
         return rolService.listarTodas();
     }
 
     @GetMapping("/{id}")
-    public Optional<Rol> obtenerPorId(@PathVariable Long id) {
-        return rolService.buscarPorId(id);
+    public ResponseEntity<RolResponse> obtenerPorId(@PathVariable Long id) {
+        RolResponse rolResponse = rolService.buscarPorId(id);
+        return ResponseEntity.ok(rolResponse);
     }
 
     @PostMapping
-    public Rol crear(@RequestBody Rol rol) {
-        return rolService.guardar(rol);
+    public ResponseEntity<?> crear(@RequestBody RolRequest rolRequest) {
+        RolResponse rolResponse = rolService.guardar(rolRequest);
+        return ResponseEntity.ok(rolResponse);
+
     }
 
     @PutMapping
-    public Rol actualizar(@PathVariable Long id, @RequestBody Rol rol) {
-        rol.setId_rol(id);
-        return rolService.guardar(rol);
+    public ResponseEntity<RolResponse> actualizar(@PathVariable Long id, @RequestBody RolRequest rolRequest) {
+
+        RolResponse rolActualizado = rolService.actualizar(id, rolRequest);
+        return ResponseEntity.ok(rolActualizado);
     }
 
     @DeleteMapping

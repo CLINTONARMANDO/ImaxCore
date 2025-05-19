@@ -13,11 +13,11 @@ public class RolMapper {
         rolResponse.setDescripcion(rol.getDescripcion());
         return rolResponse;
     }
-    public static Rol toEntity(RolResponse rolResponse) {
+    public static Rol toEntity(RolRequest rolRequest) {
         Rol rol = new Rol();
-        rol.setId_rol(rolResponse.getId_rol());
-        rol.setNombre(rolResponse.getNombre());
-        rol.setDescripcion(rolResponse.getDescripcion());
+        rol.setId_rol(rolRequest.getId_rol());
+        rol.setNombre(rolRequest.getNombre());
+        rol.setDescripcion(rolRequest.getDescripcion());
         return rol;
     }
     public static void updateEntityFromRequest(Rol rol, RolRequest rolRequest) {

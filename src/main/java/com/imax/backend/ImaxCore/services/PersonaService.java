@@ -18,7 +18,7 @@ public class PersonaService {
     private PersonaRepository personaRepository;
 
     public List<PersonaResponse> listarTodas() {
-        List<Persona> personas = personaRepository.findAll();
+        List<Persona> personas = personaRepository.findAllByVigenteTrue();
         return personas
                 .stream()
                 .map(PersonaMapper::toResponse)
@@ -44,8 +44,8 @@ public class PersonaService {
         // Actualizar los campos necesarios
         PersonaMapper.updateEntityFromRequest(personaExistente, personaRequest);
 
-        Persona personaGuardada = personaRepository.save(personaExistente);
-        return PersonaMapper.toResponse(personaGuardada);
+        Persona personaActualizado = personaRepository.save(personaExistente);
+        return PersonaMapper.toResponse(personaActualizado);
     }
 
     public void eliminar(Long id) {

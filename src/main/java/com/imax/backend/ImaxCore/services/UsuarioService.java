@@ -33,7 +33,7 @@ public class UsuarioService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public List<UsuarioResponse> listarTodos() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<Usuario> usuarios = usuarioRepository.findAllByVigenteTrue();
         return usuarios
                 .stream()
                 .map(UsuarioMapper::toResponse)

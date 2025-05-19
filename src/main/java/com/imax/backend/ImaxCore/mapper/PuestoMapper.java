@@ -11,22 +11,21 @@ public class PuestoMapper {
         puestoResponse.setId_puesto(puesto.getId_puesto());
         puestoResponse.setNombre(puesto.getNombre());
         puestoResponse.setDescripcion(puesto.getDescripcion());
-        puestoResponse.setAreaDefault(puesto.getAreaDefault());
+        puestoResponse.setArea(puesto.getArea());
 
         return puestoResponse;
     }
-    public static Puesto toEntity(PuestoResponse puestoResponse) {
+    public static Puesto toEntity(PuestoRequest puestoRequest) {
         Puesto puesto = new Puesto();
-        puesto.setId_puesto(puestoResponse.getId_puesto());
-        puesto.setNombre(puestoResponse.getNombre());
-        puesto.setDescripcion(puestoResponse.getDescripcion());
-        puesto.setAreaDefault(puestoResponse.getAreaDefault());
+        puesto.setId_puesto(puestoRequest.getId_puesto());
+        puesto.setNombre(puestoRequest.getNombre());
+        puesto.setDescripcion(puestoRequest.getDescripcion());
+        puesto.setArea(puestoRequest.getArea());
         return puesto;
     }
     public static void updateFromRequest(Puesto puesto, PuestoRequest puestoRequest) {
         puesto.setNombre(puestoRequest.getNombre());
         puesto.setDescripcion(puestoRequest.getDescripcion());
-        puesto.setAreaDefault(puestoRequest.getAreaDefault());
+        puesto.setArea(puestoRequest.getArea());
     }
-
 }
