@@ -41,7 +41,7 @@ public class PersonaService {
         Persona personaExistente = personaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
 
-        // Actualizar los campos necesarios
+
         PersonaMapper.updateEntityFromRequest(personaExistente, personaRequest);
 
         Persona personaActualizado = personaRepository.save(personaExistente);

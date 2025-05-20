@@ -16,6 +16,9 @@ public class Area extends BaseEntity {
     @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "descripcion")
+    private String descripcion;
+
     @OneToMany(mappedBy = "area",fetch = FetchType.LAZY)
     private List<Empleado> empleados;
 
@@ -39,5 +42,11 @@ public class Area extends BaseEntity {
     }
     public void setEmpleados(List<Empleado> empleados) {
         this.empleados = empleados;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
