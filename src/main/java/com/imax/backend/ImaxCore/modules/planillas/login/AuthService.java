@@ -30,6 +30,7 @@ public class AuthService {
     private UsuarioRepository usuarioRepo;
 
     public AuthResponse login(AuthRequest request) {
+        // Autenticar
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -37,6 +38,7 @@ public class AuthService {
                 )
         );
 
+        // Obtener usuario
         Usuario usuario = usuarioRepo.findByNombreusuario(request.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
@@ -44,16 +46,21 @@ public class AuthService {
             throw new DisabledException("Usuario deshabilitado");
         }
 
+        // Generar token
         String token = jwtUtil.generateToken(
                 usuario.getNombreusuario(),
                 usuario.getRol().getNombre()
         );
-        List<ModuloResponse> modulos = usuario.getRol().getModulos()
+
+        // Construir árbol de módulos desde los padres
+        List<ModuloResponse> modulosJerarquicos = usuario.getRol()
+                .getModulos()
                 .stream()
-                .map(ModuloMapper::toResponse)
+                .filter(modulo -> modulo.getModuloPadre() == null)
+                .map(ModuloMapper::toResponseRecursivo)
                 .collect(Collectors.toList());
 
-        return new AuthResponse(token, modulos);
+        return new AuthResponse(token, modulosJerarquicos);
     }
 
 }

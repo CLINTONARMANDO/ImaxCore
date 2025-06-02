@@ -8,7 +8,10 @@ import java.util.List;
 @Getter
 @Setter
 public class ModuloResponse {
+
+    private Long id;
     private String nombre;
     private String ruta;
     private List<ModuloResponse> submodulos;
+
 }

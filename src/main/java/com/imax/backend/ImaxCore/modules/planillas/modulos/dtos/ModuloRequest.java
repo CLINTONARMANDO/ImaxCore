@@ -12,5 +12,5 @@ public class ModuloRequest {
     private String ruta;
     private String descripcion;
     private List<ModuloRequest> submodulos;
-    private Long idModuloPadre;
+    private Long moduloPadreId;
 }

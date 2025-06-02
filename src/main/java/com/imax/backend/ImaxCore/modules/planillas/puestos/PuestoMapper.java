@@ -1,5 +1,7 @@
 package com.imax.backend.ImaxCore.modules.planillas.puestos;
 
+import com.imax.backend.ImaxCore.modules.planillas.areas.Area;
+import com.imax.backend.ImaxCore.modules.planillas.areas.AreaMapper;
 import com.imax.backend.ImaxCore.modules.planillas.puestos.dtos.PuestoRequest;
 import com.imax.backend.ImaxCore.modules.planillas.puestos.dtos.PuestoResponse;
 
@@ -10,21 +12,21 @@ public class PuestoMapper {
         puestoResponse.setId_puesto(puesto.getId_puesto());
         puestoResponse.setNombre(puesto.getNombre());
         puestoResponse.setDescripcion(puesto.getDescripcion());
-        puestoResponse.setArea(puesto.getArea());
+        puestoResponse.setAreaResponse(AreaMapper.toResponse(puesto.getArea()));
 
         return puestoResponse;
     }
-    public static Puesto toEntity(PuestoRequest puestoRequest) {
+    public static Puesto toEntity(PuestoRequest puestoRequest, Area area) {
         Puesto puesto = new Puesto();
         puesto.setId_puesto(puestoRequest.getId_puesto());
         puesto.setNombre(puestoRequest.getNombre());
         puesto.setDescripcion(puestoRequest.getDescripcion());
-        puesto.setArea(puestoRequest.getArea());
+        puesto.setArea(area);
         return puesto;
     }
-    public static void updateFromRequest(Puesto puesto, PuestoRequest puestoRequest) {
+    public static void updateFromRequest(Puesto puesto, PuestoRequest puestoRequest, Area area) {
         puesto.setNombre(puestoRequest.getNombre());
         puesto.setDescripcion(puestoRequest.getDescripcion());
-        puesto.setArea(puestoRequest.getArea());
+        puesto.setArea(area);
     }
 }

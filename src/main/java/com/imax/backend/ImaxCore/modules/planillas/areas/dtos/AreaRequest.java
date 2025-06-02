@@ -9,8 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 public class AreaRequest {
-    private Long id;
     private String nombre;
     private String descripcion;
-    private List<Empleado> empleados;
 }

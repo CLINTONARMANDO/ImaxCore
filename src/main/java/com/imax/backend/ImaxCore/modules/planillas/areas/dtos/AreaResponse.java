@@ -13,5 +13,4 @@ public class AreaResponse {
     private Long id;
     private String nombre;
     private String descripcion;
-    private List<Empleado> empleados;
 }

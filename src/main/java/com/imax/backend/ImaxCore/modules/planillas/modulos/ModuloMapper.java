@@ -11,6 +11,7 @@ public class ModuloMapper {
         ModuloResponse moduloResponse = new ModuloResponse();
         moduloResponse.setNombre(modulo.getNombre());
         moduloResponse.setRuta(modulo.getRuta());
+        moduloResponse.setId(modulo.getIdModulo());
         if (modulo.getSubmodulos() != null && !modulo.getSubmodulos().isEmpty()) {
             moduloResponse.setSubmodulos(
                     modulo.getSubmodulos()
@@ -40,4 +41,21 @@ public class ModuloMapper {
         }
         return modulo;
     }
+    public static ModuloResponse toResponseRecursivo(Modulo modulo) {
+        ModuloResponse moduloResponse = new ModuloResponse();
+        moduloResponse.setNombre(modulo.getNombre());
+        moduloResponse.setRuta(modulo.getRuta());
+        moduloResponse.setId(modulo.getIdModulo());
+
+        if (modulo.getSubmodulos() != null && !modulo.getSubmodulos().isEmpty()) {
+            List<ModuloResponse> hijos = modulo.getSubmodulos()
+                    .stream()
+                    .map(ModuloMapper::toResponseRecursivo)
+                    .collect(Collectors.toList());
+            moduloResponse.setSubmodulos(hijos);
+        }
+
+        return moduloResponse;
+    }
+
 }

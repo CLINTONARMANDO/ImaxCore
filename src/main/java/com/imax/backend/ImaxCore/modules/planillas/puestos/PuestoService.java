@@ -1,5 +1,7 @@
 package com.imax.backend.ImaxCore.modules.planillas.puestos;
 
+import com.imax.backend.ImaxCore.modules.planillas.areas.Area;
+import com.imax.backend.ImaxCore.modules.planillas.areas.AreaRepository;
 import com.imax.backend.ImaxCore.modules.planillas.puestos.dtos.PuestoRequest;
 import com.imax.backend.ImaxCore.modules.planillas.puestos.dtos.PuestoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class PuestoService {
 
     @Autowired
     private PuestoRepository puestoRepository;
+    @Autowired
+    private AreaRepository areaRepository;
 
     public List<PuestoResponse> listarTodas() {
         List<Puesto> puestos = puestoRepository.findAllByVigenteTrue();
@@ -29,7 +33,9 @@ public class PuestoService {
     }
 
     public PuestoResponse guardar(PuestoRequest puestoRequest) {
-        Puesto puesto = PuestoMapper.toEntity(puestoRequest);
+        Area area = areaRepository.findById(puestoRequest.getId_area())
+                .orElseThrow(() -> new RuntimeException("area no encontrado"));
+        Puesto puesto = PuestoMapper.toEntity(puestoRequest, area);
         Puesto puestoGuardado = puestoRepository.save(puesto);
         return PuestoMapper.toResponse(puestoGuardado);
     }
@@ -37,7 +43,9 @@ public class PuestoService {
     public PuestoResponse actualizar(Long id, PuestoRequest puestoRequest) {
         Puesto puestoExistente = puestoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("puesto no encontrado"));
-        PuestoMapper.updateFromRequest(puestoExistente, puestoRequest);
+        Area area = areaRepository.findById(puestoRequest.getId_area())
+                .orElseThrow(() -> new RuntimeException("area no encontrado"));
+        PuestoMapper.updateFromRequest(puestoExistente, puestoRequest, area);
 
         Puesto puestoActualizado = puestoRepository.save(puestoExistente);
         return PuestoMapper.toResponse(puestoActualizado);

@@ -15,6 +15,7 @@ import java.util.List;
 public class Modulo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id_modulo")
     private Long idModulo;
 

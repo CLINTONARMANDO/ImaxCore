@@ -26,9 +26,14 @@ public class ModuloController {
         return moduloService.obtenerSubmodulosPorPadre(id);
     }
     @PostMapping
-    public ResponseEntity<ModuloResponse> crearModulo(@RequestBody ModuloRequest request) {
-        ModuloResponse creado = moduloService.crearModulo(request);
+    public ResponseEntity<ModuloResponse> crearModulo(@RequestBody ModuloRequest moduloRequest) {
+        ModuloResponse creado = moduloService.crearModulo(moduloRequest);
         return new ResponseEntity<>(creado, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/jerarquia")
+    public List<ModuloResponse> obtenerEstructuraJerarquica() {
+        return moduloService.obtenerJerarquiaDeModulos();
     }
 
 }

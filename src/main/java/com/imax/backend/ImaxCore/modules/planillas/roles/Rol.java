@@ -3,6 +3,8 @@ package com.imax.backend.ImaxCore.modules.planillas.roles;
 import com.imax.backend.ImaxCore.shared.BaseEntity;
 import com.imax.backend.ImaxCore.modules.planillas.modulos.Modulo;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class Rol extends BaseEntity {
             joinColumns = @JoinColumn(name = "id_rol"),
             inverseJoinColumns = @JoinColumn(name = "id_modulo")
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Modulo> modulos;
 
 // + su getter y setter

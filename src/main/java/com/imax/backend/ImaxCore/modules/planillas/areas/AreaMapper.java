@@ -13,7 +13,6 @@ public class AreaMapper {
     }
     public static Area toRentity(AreaRequest areaRequest) {
         Area area = new Area();
-        area.setId(areaRequest.getId());
         area.setDescripcion(areaRequest.getDescripcion());
         area.setNombre(areaRequest.getNombre());
         return area;

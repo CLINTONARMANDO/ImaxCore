@@ -30,8 +30,8 @@ public class ModuloService {
     public ModuloResponse crearModulo(ModuloRequest moduloRequest) {
         Modulo modulo = ModuloMapper.toEntity(moduloRequest);
 
-        if (moduloRequest.getIdModuloPadre() != null) {
-            Modulo padre = moduloRepository.findById(moduloRequest.getIdModuloPadre())
+        if (moduloRequest.getModuloPadreId() != null) {
+            Modulo padre = moduloRepository.findById(moduloRequest.getModuloPadreId())
                     .orElseThrow(() -> new RuntimeException("Módulo padre no encontrado"));
             modulo.setModuloPadre(padre);
         }
@@ -39,5 +39,12 @@ public class ModuloService {
         Modulo guardado = moduloRepository.save(modulo);
         return ModuloMapper.toResponse(guardado);
     }
+    public List<ModuloResponse> obtenerJerarquiaDeModulos() {
+        List<Modulo> modulosPadre = moduloRepository.findByModuloPadreIsNull();
+        return modulosPadre.stream()
+                .map(ModuloMapper::toResponseRecursivo)
+                .collect(Collectors.toList());
+    }
+
 
 }

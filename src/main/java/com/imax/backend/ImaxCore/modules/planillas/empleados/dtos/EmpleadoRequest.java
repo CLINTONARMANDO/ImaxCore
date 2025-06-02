@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class EmpleadoRequest {
 
     private Long id;
-    private Persona persona;
-    private Area area;
-    private Puesto puesto;
+    private Long idPersona;
+    private Long idArea;
+    private Long idPuesto;
     private LocalDate fechaContratacion;
 }

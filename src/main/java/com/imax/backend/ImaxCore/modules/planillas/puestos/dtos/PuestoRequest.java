@@ -12,5 +12,5 @@ public class PuestoRequest {
     private Long id_puesto;
     private String nombre;
     private String descripcion;
-    private Area area;
+    private Long id_area;
 }
